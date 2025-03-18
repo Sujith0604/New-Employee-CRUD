@@ -10,7 +10,20 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json({ limit: "50mb" }));
-app.use("/uploads", express.static("uploads")); // Serve static files from the 'uploads' directory
+
+app.use("/uploads", express.static("uploads"));
+
+// Set up Multer for file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 mongoose
   .connect("mongodb://localhost:27017/NewEmployeeDetails")
@@ -20,18 +33,6 @@ mongoose
   .catch((err) => {
     console.log("Error connecting to MongoDB", err);
   });
-
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
-
-const upload = multer({ storage });
 
 app.get("/", async (req, res) => {
   try {
@@ -56,8 +57,7 @@ app.post("/", upload.single("image"), async (req, res) => {
     birthDate,
   } = req.body;
 
-  const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
-  console.log(imageUrl);
+  const imageUrl = req.file ? req.file.path : null;
 
   try {
     const employee = await Employee.create({
@@ -107,7 +107,7 @@ app.put("/:id", upload.single("image"), async (req, res) => {
     birthDate,
   } = req.body;
 
-  const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+  const imageUrl = req.file ? req.file.path : null;
 
   try {
     const employee = await Employee.findByIdAndUpdate(
