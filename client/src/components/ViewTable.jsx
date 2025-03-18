@@ -21,7 +21,7 @@ const ViewTable = ({ editId, setEditId, viewId, setViewId }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/${id}`);
+      await axios.delete(`https://new-employee-crud.onrender.com/${id}`);
       setDetails(details?.filter((detail) => detail?._id !== id));
     } catch (error) {
       console.error("Error deleting detail:", error);

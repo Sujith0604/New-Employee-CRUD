@@ -51,11 +51,15 @@ const EditDetails = ({ id, setEditId }) => {
         formData.append("image", imageFile);
       }
 
-      const res = await axios.put(`http://localhost:3000/${id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await axios.put(
+        `https://new-employee-crud.onrender.com/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       console.log("Server response:", res.data);
       setEditId(null);

@@ -7,7 +7,7 @@ const Details = ({ children }) => {
   const [details, setDetails] = useState([]);
 
   const fetchDetails = async () => {
-    const res = await axios("http://localhost:3000");
+    const res = await axios("https://new-employee-crud.onrender.com");
 
     setDetails(res.data);
   };

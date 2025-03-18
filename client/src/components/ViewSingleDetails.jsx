@@ -27,7 +27,7 @@ const ViewSingleDetails = ({ id }) => {
       <div className="space-y-4">
         <div className=" w-full flex justify-center items-center">
           <img
-            src={`http://localhost:3000/${data?.imageUrl}`}
+            src={`https://new-employee-crud.onrender.com/${data?.imageUrl}`}
             alt={data?.name}
             className="w-10 h-10 rounded-full"
           />

@@ -34,11 +34,15 @@ const AddDetails = ({ setIsAdd }) => {
         formData.append("image", imageFile);
       }
 
-      const res = await axios.post("http://localhost:3000", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await axios.post(
+        "https://new-employee-crud.onrender.com",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       setIsAdd(false);
       setDetails([...details, res.data]);
