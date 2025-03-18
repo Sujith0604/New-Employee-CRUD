@@ -98,7 +98,7 @@ const ViewTable = ({ editId, setEditId, viewId, setViewId }) => {
                     <td className="p-3 text-center">{i + 1}</td>
                     <td className="p-3">
                       <img
-                        src={`http://localhost:3000/${detail?.imageUrl}`}
+                        src={`https://new-employee-crud.onrender.com/${detail?.imageUrl}`}
                         alt={detail?.name}
                         className="w-10 h-10 rounded-full"
                       />
