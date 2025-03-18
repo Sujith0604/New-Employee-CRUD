@@ -161,10 +161,6 @@ const AddDetails = ({ setIsAdd }) => {
               <input
                 {...register("email", {
                   required: "The Employee Email is required",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Invalid email address",
-                  },
                 })}
                 className={`mt-1 block w-full p-2 border ${
                   errors.email ? "border-red-500" : "border-gray-300"
